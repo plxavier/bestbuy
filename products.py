@@ -9,6 +9,7 @@ class Product:
         deactivate(): Marks the product as inactive/unavailable.
         show() -> str: Returns a string representation of the product.
         buy(quantity: int) -> float: Purchases items, decreases stock, returns total price.
+         ***methods described with typehints.***
     """
     def __init__(self, name: str, price: float, quantity: int):
         if not name.strip():
