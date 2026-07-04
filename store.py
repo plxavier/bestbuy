@@ -20,10 +20,11 @@ class Store:
         """Add a product to the store."""
         try:
             if not isinstance(product, Product):
-                raise TypeError("Only items in the list of store-products can be added to the store")
+                raise TypeError("Only items in the list of store-products\n"
+                                " can be added to the store")
             self.products.append(product)
-        except TypeError as e:
-            print(f"Error adding product: {e}")
+        except TypeError as error:
+            print(f"Error adding product: {error}")
 
     def remove_product(self, product: Product):
         """Remove a product from the store."""
@@ -32,23 +33,23 @@ class Store:
                 self.products.remove(product)
             else:
                 print(f"Product '{product.name}' not found in store")
-        except AttributeError as e:
-            print(f"Error removing product: Invalid product object - {e}")
+        except AttributeError as error:
+            print(f"Error removing product: Invalid product object - {error}")
 
     def get_total_quantity(self) -> int:
         """Return the total stock of all products."""
         try:
             return sum(p.get_quantity() for p in self.products)
-        except AttributeError as e:
-            print(f"Error calculating total quantity: {e}")
+        except AttributeError as error:
+            print(f"Error calculating total quantity: {error}")
             return 0
 
     def get_all_products(self) -> list[Product]:
         """Return all active products."""
         try:
             return [p for p in self.products if p.is_active()]
-        except AttributeError as e:
-            print(f"Error getting active products: {e}")
+        except AttributeError as error:
+            print(f"Error getting active products: {error}")
             return []
 
     def order(self, shopping_list: list[tuple[Product, int]]) -> float:
@@ -82,27 +83,28 @@ class Store:
                     raise TypeError(f"Invalid product object: {product}")
 
                 if not isinstance(quantity, int) or quantity <= 0:
-                    raise ValueError(f"Quantity must be a positive integer for product '{product.name}'")
+                    raise ValueError(f"Quantity must be a positive\n"
+                                     f" integer for product '{product.name}'")
 
                 try:
                     total_price += product.buy(quantity)
-                except ValueError as e:
-                    print(f"Error purchasing {product.name}: {e}")
+                except ValueError as error:
+                    print(f"Error purchasing {product.name}: {error}")
                     raise
-                except Exception as e:
-                    print(f"Error purchasing {product.name}: {e}")
+                except Exception as error:
+                    print(f"Error purchasing {product.name}: {error}")
                     raise
 
             return total_price
 
-        except ValueError as e:
-            print(f"Order error: {e}")
+        except ValueError as error:
+            print(f"Order error: {error}")
             raise
-        except TypeError as e:
-            print(f"Order error: {e}")
+        except TypeError as error:
+            print(f"Order error: {error}")
             raise
-        except Exception as e:
-            print(f"Unexpected order error: {e}")
+        except Exception as error:
+            print(f"Unexpected order error: {error}")
             raise
 
 
@@ -121,7 +123,8 @@ def main():
         print()
 
         # Initialize store
-        best_buy = Store(product_list)
+        best_buy = Store(product_list) #variable to be used for auto-tests
+
 
         # # Test get_all_products
         # print("=== Active Products ===")
@@ -233,8 +236,8 @@ def main():
         # except TypeError as e:
         #     print(f"  Caught: {e}")
 
-    except Exception as e:
-        print(f"Unexpected error in main: {e}")
+    except Exception as error:
+        print(f"Unexpected error in main: {error}")
 
 
 if __name__ == '__main__':
