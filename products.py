@@ -56,6 +56,7 @@ class Product:
 
 
 def main():
+    """Main function to initialize and run the store. For autotesting the script uncomment tests"""
     try:
         # Create products
         bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)

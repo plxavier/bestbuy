@@ -107,6 +107,7 @@ class Store:
 
 
 def main():
+    """Main function to initialize and run the store. For autotesting the script uncomment tests"""
     try:
         print("=== Initializing Store ===")
         # Create product list
