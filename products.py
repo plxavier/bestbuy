@@ -24,9 +24,11 @@ class Product:
         self.active = True
 
     def get_quantity(self) -> int:
+        """Returns the current stock quantity."""
         return self.quantity
 
     def set_quantity(self, quantity: int):
+        """Updates the stock quantity."""
         if quantity < 0:
             raise ValueError('Quantity cannot be negative')
         self.quantity = quantity
@@ -34,15 +36,19 @@ class Product:
             self.deactivate()
 
     def is_active(self) -> bool:
+        """Returns whether the product is active/available."""
         return self.active
 
     def deactivate(self):
+        """Marks the product as inactive/unavailable."""
         self.active = False
 
     def show(self) -> str:
+        """Returns a string representation of the product."""
         return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
     def buy(self, quantity: int) -> float:
+        """function to buy and show price."""
         if quantity <= 0:
             raise ValueError("Purchase quantity must be positive")
         if quantity > self.quantity:
@@ -135,8 +141,8 @@ def main():
         # print(bose.show())
         # print(mac.show())
 
-    except Exception as e:
-        print(f"Unexpected error: {e}")
+    except Exception as error:
+        print(f"Unexpected error: {error}")
 
 
 if __name__ == '__main__':
