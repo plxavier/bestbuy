@@ -12,8 +12,8 @@ def list_products(store: Store):
         print("\n=== Available Products ===")
         for i, product in enumerate(products, start=1):
             print(f"{i}. {product.show()}")
-    except Exception as e:
-        print(f"Error listing products: {e}")
+    except Exception as error:
+        print(f"Error listing products: {error}")
 
 
 def show_total_quantity(store: Store):
@@ -21,8 +21,8 @@ def show_total_quantity(store: Store):
     try:
         total = store.get_total_quantity()
         print(f"\nTotal of {total} items in store")
-    except Exception as e:
-        print(f"Error getting total quantity: {e}")
+    except Exception as error:
+        print(f"Error getting total quantity: {error}")
 
 
 def make_order(store: Store):
@@ -73,10 +73,11 @@ def make_order(store: Store):
                 try:
                     selected_product = products[choice - 1]
                     if not selected_product.is_active():
-                        print(f"Product '{selected_product.name}' is inactive and cannot be ordered.")
+                        print(f"Product '{selected_product.name}' is inactive\n"
+                              f" and cannot be ordered.")
                         continue
-                except Exception as e:
-                    print(f"Error checking product status: {e}")
+                except Exception as error:
+                    print(f"Error checking product status: {error}")
                     continue
 
                 orders.append((products[choice - 1], quantity))
@@ -85,23 +86,23 @@ def make_order(store: Store):
             except KeyboardInterrupt:
                 print("\nOrder cancelled by user.")
                 return
-            except Exception as e:
-                print(f"Unexpected error in order process: {e}")
+            except Exception as error:
+                print(f"Unexpected error in order process: {error}")
                 continue
 
         if orders:
             try:
                 total_price = store.order(orders)
                 print(f"\n✅ Order placed! Total payment: ${total_price:.2f}")
-            except ValueError as e:
-                print(f"Error processing order: {e}")
-            except Exception as e:
-                print(f"Error processing order: {e}")
+            except ValueError as error:
+                print(f"Error processing order: {error}")
+            except Exception as error:
+                print(f"Error processing order: {error}")
         else:
             print('No items were ordered.')
 
-    except Exception as e:
-        print(f"Unexpected error in make_order: {e}")
+    except Exception as error:
+        print(f"Unexpected error in make_order: {error}")
 
 
 def start(store: Store):
@@ -135,16 +136,16 @@ def start(store: Store):
             if action:
                 try:
                     action(store)
-                except Exception as e:
-                    print(f"Error performing action: {e}")
+                except Exception as error:
+                    print(f"Error performing action: {error}")
             else:
                 print('Please enter a valid option (1-4)')
 
         except KeyboardInterrupt:
             print("\n\nGood Bye!")
             break
-        except Exception as e:
-            print(f"Unexpected error in menu: {e}")
+        except Exception as error:
+            print(f"Unexpected error in menu: {error}")
             continue
 
 
@@ -162,11 +163,11 @@ def main():
                 Product("Samsung Galaxy S23", price=800, quantity=150),
             ]
             print("Products created successfully!")
-        except ValueError as e:
-            print(f"Error creating products: {e}")
+        except ValueError as error:
+            print(f"Error creating products: {error}")
             return
-        except Exception as e:
-            print(f"Unexpected error creating products: {e}")
+        except Exception as error:
+            print(f"Unexpected error creating products: {error}")
             return
 
         try:
@@ -174,22 +175,21 @@ def main():
             print("Store initialized successfully!")
             print(f"Total products in store: {len(best_buy.products)}")
             print(f"Total stock: {best_buy.get_total_quantity()}")
-        except Exception as e:
-            print(f"Error initializing store: {e}")
+        except Exception as error:
+            print(f"Error initializing store: {error}")
             return
 
         # Start the main menu
         try:
             start(best_buy)
-        except Exception as e:
-            print(f"Error in store menu: {e}")
+        except Exception as error:
+            print(f"Error in store menu: {error}")
 
     except KeyboardInterrupt:
         print("\n\nProgram interrupted. Good Bye!")
-    except Exception as e:
-        print(f"Fatal error in main: {e}")
+    except Exception as error:
+        print(f"Fatal error in main: {error}")
 
 
 if __name__ == "__main__":
     main()
-
